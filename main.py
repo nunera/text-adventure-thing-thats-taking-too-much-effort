@@ -10,7 +10,7 @@ ______w______________
 ______P______________
 ______P______________
 ______P______________
-______SPPPPPPS________
+______SPPPPPPS_______
 _____________________
 _____________________
 '''
@@ -26,14 +26,14 @@ gameInfo = {
                     'punch' : {
                         'type' : 'dmg',
                         'damage' : 5,
-                        'harvestDamage' : 5
-                    }
-                }
-            }
-        }
+                        'harvestDamage' : 5,
+                    },
+                },
+            },
+        },
     },
     'worldEntities' : {
-    }
+    },
 }
 
 definitions = {
@@ -46,11 +46,11 @@ definitions = {
                 'funcs' : {
                     'scratch' : {
                         'type' : 'dmg',
-                        'damage' : 2
-                    }
-                }
-            }
-        }
+                        'damage' : 2,
+                    },
+                },
+            },
+        },
     },
 }
 
