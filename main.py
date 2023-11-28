@@ -78,7 +78,6 @@ def mapSetup(m):
     spawns.remove(spawn)
     sline = m[spawn[0]]
     sline = sline[:spawn[1]] + "C" + sline[spawn[1]+1:]
-    print(sline)
     m[spawn[0]] = sline
     for i,v in enumerate(m):
         m[i] = v.replace("S",rp)
@@ -86,8 +85,6 @@ def mapSetup(m):
             if z in v:
                 for g in findall(v,z):
                     gameInfo['worldEntities'][(i,g)] = definitions[z]
-                
-    print(gameInfo)
     return m
 
 map = mapSetup(map)
