@@ -7,4 +7,4 @@ This is a simple text-based adventure game built using Python programming langua
 Make sure you have Python installed on your computer. Then, clone this repository using the following command:
 
 ```bash
-$ git clone https://github.com/yourusername/playboicartitextadventure.git
+$ git clone https://github.com/nunera/text-adventure-thing-thats-taking-too-much-effort.git
