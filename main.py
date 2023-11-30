@@ -133,7 +133,6 @@ ______ _             _           _   _____            _   _
         self.gameInfo['char']['name'] = input("Please enter your name.\n\n> ")
         print(f"\nYour name is {self.gameInfo['char']['name']}. You look around.\n")
     def render(self):
-        print(self.gameInfo['worldEntities'])
         N = False
         E = False
         S = False
