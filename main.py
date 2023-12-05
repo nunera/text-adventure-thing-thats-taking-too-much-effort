@@ -1,4 +1,4 @@
-import random
+import random, keyboard, string
 from colorama import Fore
 from time import sleep
 
@@ -68,6 +68,17 @@ definitions = {
 
 # this is so stupid that I have to do all this, it should be built in
 
+def getch():
+    alphabet = list(string.ascii_lowercase)
+    while True:
+        for letter in alphabet: # detect when a letter is pressed
+            if keyboard.is_pressed(letter):
+                return letter
+        for num in range(10): # detect numbers 0-9
+            if keyboard.is_pressed(str(num)):
+                return str(num)
+
+
 def findall(str, q):
     return list(find_all_gen(str,q))
 
@@ -89,6 +100,11 @@ class gameHandler():
         self.config = config
         self.definitions = definitions
         self.gameInfo = gameInfo
+    
+    def start(self):
+        self.mapSetup()
+        self.charSetup()
+        self.menu()
         
     def mapSetup(self):
         spawns = []
@@ -132,52 +148,26 @@ ______ _             _           _   _____            _   _
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
         self.gameInfo['char']['name'] = input("Please enter your name.\n\n> ")
         print(f"\nYour name is {self.gameInfo['char']['name']}. You look around.\n")
-    def render(self):
-        N = False
-        E = False
-        S = False
-        W = False
-        print("\n\n")
-        pos = self.gameInfo['char']['location']
-        i = 0
-        if (pos[0]-1,pos[1]) in self.gameInfo['worldEntities']:
-            N = True
-            north = "To the north "+random.choice(self.gameInfo['worldEntities'][(pos[0]-1,pos[1])]['quotes'])
-            print(f"[N] {north}")
-        if (pos[0]+1,pos[1]) in self.gameInfo['worldEntities']:
-            S = True
-            south = "To the south "+random.choice(self.gameInfo['worldEntities'][(pos[0]+1,pos[1])]['quotes'])
-            print(f"[S] {south}")
-        if (pos[0],pos[1]+1) in self.gameInfo['worldEntities']:
-            E = True
-            east = "To the east "+random.choice(self.gameInfo['worldEntities'][(pos[0],pos[1]+1)]['quotes'])
-            print(f"[E] {east}")
-        if (pos[0],pos[1]-1) in self.gameInfo['worldEntities']:
-            W = True
-            west = "To the west "+random.choice(self.gameInfo['worldEntities'][(pos[0],pos[1]-1)]['quotes'])
-            print(f"[W] {west}")
+        
+    def menu(self):
+        m = 0
         while True:
-            go = clean(input("\nPlease enter where you wish to go.\n> "))
-            if go == "n" and N:
-                self.gameInfo['char']['location'] = [pos[0]-1,pos[1]]
-                break
-            elif go == "e" and E:
-                self.gameInfo['char']['location'] = [pos[0],pos[1]+1]
-                break
-            elif go == "s" and S:
-                self.gameInfo['char']['location'] = [pos[0]+1,pos[1]]
-                break
-            elif go == "w" and W:
-                self.gameInfo['char']['location'] = [pos[0],pos[1]-1]
-                break
+            print("[0] Move\n[1] Inventory\n[2] Player\n[3] Settings")
+            choice = getch()
+            if choice == 0:
+                pass
+            elif choice == 1:
+                pass
+            elif choice == 2:
+                pass
+            elif choice == 3:
+                pass
             else:
-                print("\nThat is not an option. Try again.")
-            
+                print("That is not a choice. Try again.\n\n\n\n\n\n\n")
+        
         
             
-
+        
+        
 game = gameHandler(map, config, definitions, gameInfo)
-game.mapSetup()
-game.charSetup()
-while True:
-    game.render()
+game.start()
