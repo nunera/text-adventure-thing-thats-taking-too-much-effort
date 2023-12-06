@@ -70,6 +70,17 @@ definitions = {
 
 def getch():
     alphabet = list(string.ascii_lowercase)
+    for letter in alphabet: # detect when a letter is pressed
+            if keyboard.is_pressed(letter):
+                while True:
+                    if not keyboard.is_pressed(letter):
+                        break
+    for num in range(10): # detect numbers 0-9
+        if keyboard.is_pressed(str(num)):
+            while keyboard.is_pressed(str(num)):
+                while True:
+                    if not keyboard.is_pressed(str(num)):
+                        break
     while True:
         for letter in alphabet: # detect when a letter is pressed
             if keyboard.is_pressed(letter):
@@ -81,6 +92,7 @@ def getch():
 
 def findall(str, q):
     return list(find_all_gen(str,q))
+
 
 def find_all_gen(str, q):
     i = str.find(q)
@@ -150,17 +162,61 @@ ______ _             _           _   _____            _   _
         print(f"\nYour name is {self.gameInfo['char']['name']}. You look around.\n")
         
     def menu(self):
-        m = 0
         while True:
             print("[0] Move\n[1] Inventory\n[2] Player\n[3] Settings")
             choice = getch()
-            if choice == 0:
+            if choice == "0":
+                b = True
+                while b:
+                    N = False
+                    E = False
+                    S = False
+                    W = False
+                    print("\n\n")
+                    pos = self.gameInfo['char']['location']
+                    i = 0
+                    if (pos[0]-1,pos[1]) in self.gameInfo['worldEntities']:
+                        N = True
+                        north = "To the north "+random.choice(self.gameInfo['worldEntities'][(pos[0]-1,pos[1])]['quotes'])
+                        print(f"[N] {north}")
+                    if (pos[0]+1,pos[1]) in self.gameInfo['worldEntities']:
+                        S = True
+                        south = "To the south "+random.choice(self.gameInfo['worldEntities'][(pos[0]+1,pos[1])]['quotes'])
+                        print(f"[S] {south}")
+                    if (pos[0],pos[1]+1) in self.gameInfo['worldEntities']:
+                        E = True
+                        east = "To the east "+random.choice(self.gameInfo['worldEntities'][(pos[0],pos[1]+1)]['quotes'])
+                        print(f"[E] {east}")
+                    if (pos[0],pos[1]-1) in self.gameInfo['worldEntities']:
+                        W = True
+                        west = "To the west "+random.choice(self.gameInfo['worldEntities'][(pos[0],pos[1]-1)]['quotes'])
+                        print(f"[W] {west}")
+                    print("[R] Return")
+                    while True:
+                        print("\nPlease enter where you wish to go.\n> ")
+                        go = getch()
+                        if go == "n" and N:
+                            self.gameInfo['char']['location'] = [pos[0]-1,pos[1]]
+                            break
+                        elif go == "e" and E:
+                            self.gameInfo['char']['location'] = [pos[0],pos[1]+1]
+                            break
+                        elif go == "s" and S:
+                            self.gameInfo['char']['location'] = [pos[0]+1,pos[1]]
+                            break
+                        elif go == "w" and W:
+                            self.gameInfo['char']['location'] = [pos[0],pos[1]-1]
+                            break
+                        elif go == "r":
+                            b = False
+                            break
+                        else:
+                            print("\nThat is not an option. Try again.")
+            elif choice == "1":
                 pass
-            elif choice == 1:
+            elif choice == "2":
                 pass
-            elif choice == 2:
-                pass
-            elif choice == 3:
+            elif choice == "3":
                 pass
             else:
                 print("That is not a choice. Try again.\n\n\n\n\n\n\n")
